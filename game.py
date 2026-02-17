@@ -141,6 +141,8 @@ if __name__ == "__main__" or (len(sys.argv) > 1  and sys.argv[1] == "main"):
 		print(gs.printable_board())
 		move = input("Select the a column from 1-8\n")
 		move = int(move)
+		if move<1 or move>8:
+			raise Exception("Column not in 1-8 range")
 		gs.play(move-1,'O')
 		eval(gs)
 
