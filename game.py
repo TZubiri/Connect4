@@ -9,6 +9,8 @@ P2='X'
 TIE='T'
 UNDECIDED='?'
 
+LINE=4 #CONNECT FOUR
+
 class GameState:
 	def __init__(self,x,y):
 		#hiding GameState representation to avoid locking into a row/column bias
@@ -35,17 +37,17 @@ class GameState:
 		return str
 
 	def firstfree(self,col):
-		i=0
-		while i<8:
-			if self.get(col,i)== '-':
+		i=7
+		while i>=0:
+			if self.get(i,col)== '-':
 				return i
-			i+=1
+			i-=1
 		return None
 	def play(self,col,player):
 		ff  = self.firstfree(col)
 		if ff is None:
 			raise Exception("Can't play column " + str(col) + " . Column is full")
-		self._set(col,ff,player)
+		self._set(ff,col,player)
 
 	def dirs():
 		return [(1,0),(0,1),(1,1)]
@@ -62,16 +64,20 @@ class GameState:
 
 				for dir in GameState.dirs():
 					i=1
-					while i<4:
-						if c==self._board[x+i*dir[0]][y+i*dir[1]]:
+					while i<LINE:
+						checking_x = x+ i*dir[0]
+						checking_y = y+ i*dir[1]
+						if checking_x>7 or checking_y>7:
+							break #not a win (avoid OOB)
+						if c==self._board[checking_x][checking_y]:
 							i+=1
-							continue
+							continue #maybe a win
 						else:
-							break
-					if i==4:
-						return c
+							break # not a win
+					if i==LINE:
+						return c #definitely a win
 					else:
-						continue
+						continue #try another direction
 				y+=1
 			x+=1
 
