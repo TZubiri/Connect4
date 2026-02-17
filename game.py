@@ -50,7 +50,7 @@ class GameState:
 		self._set(ff,col,player)
 
 	def dirs():
-		return [(1,0),(0,1),(1,1)]
+		return [(1,0),(0,1),(1,1),(-1,1)]
 	def winner(self):
 		empties = 0
 		x = 0
@@ -124,10 +124,10 @@ def test():
 	b3 = GameState(8,8)
 	b1._board = GameState.aos2aoaoc(testcase1)
 	b2._board = GameState.aos2aoaoc(testcase2)
-	b3._board = GameState.aos2aoaoc(testcase2)
+	b3._board = GameState.aos2aoaoc(testcase3)
 	assert b1.winner() == 'O'
 	assert b2.winner() == 'O'
-	assert b2.winner() == 'X'
+	assert b3.winner() == 'X'
 
 
 if len(sys.argv) >1 and sys.argv[1]=="test":
