@@ -12,7 +12,7 @@ UNDECIDED='?'
 class GameState:
 	def __init__(self,x,y):
 		#hiding GameState representation to avoid locking into a row/column bias
-		self._board = [['-']*8]*8
+		self._board = [['-']*8 for i in range(8)]
 	def get(self,x,y):
 		return self._board[x][y]
 	def _set(self,x,y,val):
