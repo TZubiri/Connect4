@@ -127,7 +127,7 @@ if __name__ == "__main__" or (len(sys.argv) > 1  and sys.argv[1] == "main"):
 		if win=='?':
 			return
 		print("\n\n")
-		print(gs.printable_board)
+		print(gs.printable_board())
 		if win=='T':
 			print("\n\nTHE GAME IS A TIE!")
 			exit()
