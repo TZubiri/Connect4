@@ -67,7 +67,7 @@ class GameState:
 					while i<LINE:
 						checking_x = x+ i*dir[0]
 						checking_y = y+ i*dir[1]
-						if checking_x<0 or checking_y <0 or chchecking_x>7 or checking_y>7:
+						if checking_x<0 or checking_y <0 or checking_x>7 or checking_y>7:
 							break #not a win (avoid OOB)
 						if c==self._board[checking_x][checking_y]:
 							i+=1
