@@ -12,9 +12,9 @@ UNDECIDED='?'
 class GameState:
 	def __init__(self,x,y):
 		#hiding GameState representation to avoid locking into a row/column bias
-		self._board = [['']*8]*8
+		self._board = [['-']*8]*8
 	def get(self,x,y):
-		return self.board[x][y]
+		return self._board[x][y]
 	def _set(self,x,y,val):
 		self._board[x][y] = val
 	#array of strings to array of array of chars
@@ -26,6 +26,19 @@ class GameState:
 				aoc.append(c)
 			aoaoc.append(aoc)
 		return aoaoc
+
+	def firstfree(self,col):
+		i=0
+		while i<8:
+			if self.get(col,i)== '-':
+				return i
+			i+=1
+		return None
+	def play(self,col,player):
+		ff  = self.firstfree(col)
+		if ff is None:
+			raise Exception("Can't play column " + str(col) + " . Column is full")
+		self._set(col,ff,player)
 
 	def dirs():
 		return [(1,0),(0,1),(1,1)]
@@ -92,3 +105,15 @@ def test():
 
 if len(sys.argv) >1 and sys.argv[1]=="test":
 	test()
+if __name__ == "__main__" or (len(sys.argv) > 1  and sys.argv[1] == "main"):
+	import random
+	gs = GameState(8,8)
+	while True:
+		print(gs._board)
+		move = input("Select the a column from 1-8")
+		move = int(move)
+		gs.play(move-1,'O')
+		opp_move = random.randrange(0,8)
+		gs.play(opp_move,'X')
+		print('opponent plays column '+ str(opp_move))
+		
