@@ -108,13 +108,26 @@ def test():
 			'-XOOXOX-',
 			'-XOOXXX-',
 ]
+	testcase3= [
+			'--------',
+			'--------',
+			'--------',
+			'--------',
+			'--OOXO--',
+			'--OXOXO-',
+			'-XXOXOX-',
+			'-XOOOXX-',
+]
 
 	b1 = GameState(8,8)
 	b2 = GameState(8,8)
+	b3 = GameState(8,8)
 	b1._board = GameState.aos2aoaoc(testcase1)
 	b2._board = GameState.aos2aoaoc(testcase2)
+	b3._board = GameState.aos2aoaoc(testcase2)
 	assert b1.winner() == 'O'
 	assert b2.winner() == 'O'
+	assert b2.winner() == 'X'
 
 
 if len(sys.argv) >1 and sys.argv[1]=="test":
