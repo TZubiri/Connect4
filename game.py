@@ -26,6 +26,13 @@ class GameState:
 				aoc.append(c)
 			aoaoc.append(aoc)
 		return aoaoc
+	def printable_board(self):
+		str = ""
+		for row in self._board:
+			for c in row:
+				str+=c
+			str+='\n'
+		return str
 
 	def firstfree(self,col):
 		i=0
@@ -109,7 +116,7 @@ if __name__ == "__main__" or (len(sys.argv) > 1  and sys.argv[1] == "main"):
 	import random
 	gs = GameState(8,8)
 	while True:
-		print(gs._board)
+		print(gs.printable_board())
 		move = input("Select the a column from 1-8")
 		move = int(move)
 		gs.play(move-1,'O')
